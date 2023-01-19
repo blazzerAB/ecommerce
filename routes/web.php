@@ -21,3 +21,7 @@ Route::get('/', function () {
 Route::get('/product', function(){
     return view('content.product');
 });
+
+Route::get('/usuario', function(){
+    return view('content.usuario');
+});
