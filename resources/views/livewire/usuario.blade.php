@@ -13,19 +13,16 @@
                     <div id="emailHelp" class="form-text text-primary">Referencias del canal.</div>
                 <div class="mb-3 form-check">
                     <input type="checkbox" class="form-check-input" wire:model='sameName' wire:change='sameName'>
-                    <label class="form-check-label" for="exampleCheck1">El canal tiene el mismo nombre del usuario</label>
+                    <label class="form-check-label" >El canal tiene el mismo nombre del usuario?</label>
                 </div>
-                @if (!$sameName)
-                    <label class="form-label mb-3">Nombre del canal
-                        <input wire:model='canal.nombre' type="text" class="form-control w-100">
-                    </label>
-                @endif
-
+                <label class="form-label mb-3">Nombre del canal
+                    <input wire:model='canal.nombre' type="text" class="form-control w-100" {{ $sameName ? 'disabled' : '' }}>
+                </label>
                 <label class="form-label mb-3">Nombre de usuario
                     <input wire:model='canal.usuario' type="text" class="form-control">
                 </label>
 
-            <button wire:click='saveUser' class="btn btn-primary">Crear</button>
+                <button wire:click='saveUser' class="btn {{ $submit ? 'btn-primary' : 'btn-outline-danger '}}"{{ !$submit ? 'disabled' : '' }}>Crear</button>
         </div>
     </div>
 </div>

@@ -5,11 +5,13 @@ namespace App\Http\Livewire;
 use App\Models\Canal;
 use App\Models\Usuario as ModelsUsuario;
 use CreateCanalsTable;
+use Illuminate\Auth\Events\Validated;
+use Illuminate\Support\Facades\Validator;
 use Livewire\Component;
 
 class Usuario extends Component
 {
-    public $usuario = [], $sameName = false, $canal = [];
+    public $usuario = [], $sameName = false, $canal = [], $submit = false, $reserve;
 
     public function saveUser()
     {
@@ -22,13 +24,44 @@ class Usuario extends Component
 
     public function sameName()
     {
-        if ($this->sameName && isset($this->usuario['nombre'])) {
+        $this->reserve = true;
+
+        if ($this->sameName && isset($this->usuario['nombre']) && $this->reserve = true) {
             $this->canal['nombre'] = $this->usuario['nombre'];
         }
         else{
-            $this->canal['nombre'] = null;
+            $this->canal['nombre'] = $this->canal['nombre'];
         }
+
+
+        $this->updateValidation();
     }
+
+
+    public function updated(){
+        $this->updateValidation();
+    }
+
+    public function updateValidation()
+    {
+
+    $this->submit = false;
+
+    $validate = [
+        'usuario.nombre' => 'required|string',
+        'usuario.correo' => 'required|string',
+        'canal.usuario' => 'required|string'
+    ];
+
+    if (!$this->sameName) {
+       $validate['canal.nombre'] = 'required|string';
+    }
+
+    $this->validate($validate);
+
+    $this->submit = true;
+    }
+
 
     public function render()
     {
