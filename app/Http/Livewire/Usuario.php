@@ -11,7 +11,7 @@ use Livewire\Component;
 
 class Usuario extends Component
 {
-    public $usuario = [], $sameName = false, $canal = [], $submit = false, $reserve;
+    public $usuario = [], $sameName = false, $canal = [], $submit = false, $reserve, $check = false;
 
     public function saveUser()
     {
@@ -24,15 +24,14 @@ class Usuario extends Component
 
     public function sameName()
     {
-        $this->reserve = true;
+        $this->reserve = $this->canal['nombre'];
 
-        if ($this->sameName && isset($this->usuario['nombre']) && $this->reserve = true) {
+        if ($this->sameName && isset($this->usuario['nombre'])) {
             $this->canal['nombre'] = $this->usuario['nombre'];
         }
-        else{
-            $this->canal['nombre'] = $this->canal['nombre'];
+        elseif($this->reserve){
+            $this->reserve;
         }
-
 
         $this->updateValidation();
     }
